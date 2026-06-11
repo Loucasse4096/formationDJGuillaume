@@ -1,0 +1,771 @@
+<!DOCTYPE html>
+<!--
+═══════════════════════════════════════════════════════════════════════════
+  LANDING PAGE — Formation "Vivre de l'événementiel"
+  Page de validation / liste d'attente — fichier unique, prêt pour FTP.
+
+  ✅ À REMPLACER AVANT MISE EN LIGNE (cherche les [CROCHETS] et placeholders) :
+
+  1. JS (tout en bas de ce fichier) :
+     - WEBHOOK_URL        → l'URL du webhook N8N qui reçoit les emails
+  2. Pixel Meta (dans le <head>) :
+     - PIXEL_ID_HERE      → l'ID du pixel Facebook (2 occurrences)
+  3. Textes / chiffres (cherche "[" dans le fichier) :
+     - [PRÉNOM]           → prénom du DJ
+     - [MOIS/ANNÉE]       → date d'ouverture de la formation (2 occurrences)
+     - [X] / [Y] / [Z]    → événements/an, DJs du réseau, sources de revenus
+     - [N]                → il y a combien d'années il a démarré
+     - [DEPUIS X ANNÉES]  → ancienneté dans la bio
+     - [@HANDLE_INSTA]    → handle Instagram (message de succès + footer)
+     - [LIEN_INSTAGRAM]   → URL du compte Instagram (footer)
+     - [NOM DU PROJET]    → nom du projet dans le copyright
+  4. Images (cherche "PHOTO:" dans le fichier) :
+     - hero.webp / hero.jpg       → [PRÉNOM] aux platines en soirée
+     - portrait.webp / portrait.jpg → portrait de [PRÉNOM] en situation
+     - og-image.jpg               → image de partage 1200×630 (Open Graph)
+     - favicon.ico                → favicon
+  5. Footer :
+     - mentions-legales.html      → page mentions légales (lien placeholder)
+═══════════════════════════════════════════════════════════════════════════
+-->
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- SEO -->
+  <title>Vis de l'événementiel. À ton compte. — La formation de [PRÉNOM]</title>
+  <meta name="description" content="DJ le week-end mais tu n'en vis pas ? [PRÉNOM], DJ pro à Toulouse, ouvre une formation pour vivre de l'événementiel en indépendant. Rejoins la liste d'attente.">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Vis de l'événementiel. À ton compte.">
+  <meta property="og:description" content="La méthode terrain de [PRÉNOM], DJ pro à Toulouse, pour vivre de l'événementiel en indépendant. Liste d'attente ouverte.">
+  <meta property="og:image" content="og-image.jpg">
+  <meta property="og:locale" content="fr_FR">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Vis de l'événementiel. À ton compte.">
+  <meta name="twitter:description" content="La méthode terrain de [PRÉNOM], DJ pro à Toulouse, pour vivre de l'événementiel en indépendant.">
+  <meta name="twitter:image" content="og-image.jpg">
+
+  <!-- FAVICON: placeholder -->
+  <link rel="icon" href="favicon.ico">
+
+  <!-- Google Fonts : Anton (titres) + Inter (corps) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <!-- Pixel Meta (Facebook) — remplacer PIXEL_ID_HERE -->
+  <script>
+    !function(f,b,e,v,n,t,s)
+    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+    n.queue=[];t=b.createElement(e);t.async=!0;
+    t.src=v;s=b.getElementsByTagName(e)[0];
+    s.parentNode.insertBefore(t,s)}(window,document,'script',
+    'https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init', 'PIXEL_ID_HERE');
+    fbq('track', 'PageView');
+  </script>
+  <noscript><img height="1" width="1" style="display:none"
+    src="https://www.facebook.com/tr?id=PIXEL_ID_HERE&ev=PageView&noscript=1"
+  /></noscript>
+
+  <style>
+    /* ═══════════ RESET & TOKENS ═══════════ */
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --bg: #0B0D12;          /* noir bleuté backstage */
+      --bg-raised: #12151D;   /* panneaux légèrement éclaircis */
+      --ink: #F2F0EB;         /* blanc cassé */
+      --ink-dim: #A39F96;     /* gris secondaire (AA sur --bg) */
+      --accent: #FFB347;      /* ambre néon — usage parcimonieux */
+      --line: rgba(242, 240, 235, 0.12);
+      --font-display: 'Anton', 'Arial Narrow', sans-serif;
+      --font-body: 'Inter', system-ui, sans-serif;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--ink);
+      font-family: var(--font-body);
+      font-size: 1rem;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    img { max-width: 100%; display: block; }
+
+    a { color: var(--ink); }
+
+    /* Focus visible au clavier */
+    :focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 3px;
+      border-radius: 2px;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 680px;
+      margin-inline: auto;
+      padding-inline: 1.25rem;
+    }
+
+    /* ═══════════ TYPO ═══════════ */
+    h1, h2 {
+      font-family: var(--font-display);
+      font-weight: 400;
+      text-transform: uppercase;
+      letter-spacing: -0.01em;
+      line-height: 1.05;
+    }
+
+    h1 { font-size: clamp(2.6rem, 11vw, 4.5rem); }
+    h2 { font-size: clamp(1.8rem, 7vw, 2.6rem); margin-bottom: 1.25rem; }
+
+    .dim { color: var(--ink-dim); }
+
+    /* ═══════════ ÉLÉMENT SIGNATURE : timecodes de tracklist ═══════════ */
+    .timecode {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      font-family: var(--font-body);
+      font-size: 0.8rem;
+      font-weight: 600;
+      letter-spacing: 0.18em;
+      color: var(--accent);
+      margin-bottom: 1rem;
+      font-variant-numeric: tabular-nums;
+    }
+    .timecode::after {
+      content: "";
+      flex: 1;
+      height: 1px;
+      background: var(--line);
+    }
+
+    /* ═══════════ SECTIONS ═══════════ */
+    section { padding-block: 4.5rem; }
+
+    /* ═══════════ HERO ═══════════ */
+    .hero {
+      min-height: 100svh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding-block: 2.5rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* halo ambre très discret, esprit néon de bar */
+    .hero::before {
+      content: "";
+      position: absolute;
+      top: -30%;
+      right: -40%;
+      width: 80vw;
+      height: 80vw;
+      max-width: 600px;
+      max-height: 600px;
+      background: radial-gradient(circle, rgba(255, 179, 71, 0.07) 0%, transparent 65%);
+      pointer-events: none;
+    }
+
+    .eyebrow {
+      font-size: 0.8rem;
+      font-weight: 600;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 1.25rem;
+    }
+
+    .hero h1 { margin-bottom: 1.25rem; }
+    .hero h1 .accent { color: var(--accent); }
+
+    .hero .sub {
+      color: var(--ink-dim);
+      font-size: 1.05rem;
+      max-width: 36ch;
+      margin-bottom: 2rem;
+    }
+    .hero .sub strong { color: var(--ink); font-weight: 600; }
+
+    /* ═══════════ FORMULAIRE ═══════════ */
+    .signup-form { width: 100%; }
+
+    .form-row {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+
+    .signup-form input[type="email"] {
+      width: 100%;
+      padding: 1rem 1.1rem;
+      font: inherit;
+      font-size: 1rem;
+      color: var(--ink);
+      background: var(--bg-raised);
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      transition: border-color 0.15s ease;
+    }
+    .signup-form input[type="email"]::placeholder { color: var(--ink-dim); }
+    .signup-form input[type="email"]:focus {
+      outline: none;
+      border-color: var(--accent);
+    }
+
+    .signup-form button {
+      width: 100%;
+      padding: 1rem 1.5rem;
+      font-family: var(--font-body);
+      font-size: 1rem;
+      font-weight: 600;
+      letter-spacing: 0.02em;
+      color: #14100A;
+      background: var(--accent);
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: transform 0.12s ease, box-shadow 0.12s ease, opacity 0.15s ease;
+    }
+    .signup-form button:hover {
+      box-shadow: 0 0 24px rgba(255, 179, 71, 0.35);
+      transform: translateY(-1px);
+    }
+    .signup-form button:active { transform: translateY(0); }
+    .signup-form button:disabled {
+      opacity: 0.6;
+      cursor: wait;
+      transform: none;
+      box-shadow: none;
+    }
+
+    .reassure {
+      font-size: 0.85rem;
+      color: var(--ink-dim);
+      margin-top: 0.75rem;
+    }
+
+    .form-error {
+      display: none;
+      font-size: 0.9rem;
+      color: #FF8A65;
+      margin-top: 0.6rem;
+    }
+    .form-error.visible { display: block; }
+
+    .form-success {
+      display: none;
+      padding: 1.25rem;
+      background: var(--bg-raised);
+      border: 1px solid rgba(255, 179, 71, 0.4);
+      border-radius: 6px;
+      font-size: 1rem;
+    }
+    .form-success.visible { display: block; }
+    .form-success a { color: var(--accent); }
+
+    /* Sur écrans plus larges : champ + bouton côte à côte */
+    @media (min-width: 560px) {
+      .form-row { flex-direction: row; }
+      .signup-form input[type="email"] { flex: 1; }
+      .signup-form button { width: auto; white-space: nowrap; }
+    }
+
+    /* ═══════════ PHOTO PLACEHOLDERS ═══════════ */
+    .photo-placeholder {
+      width: 100%;
+      aspect-ratio: 4 / 3;
+      background: var(--bg-raised);
+      border: 1px dashed var(--line);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--ink-dim);
+      font-size: 0.85rem;
+      letter-spacing: 0.05em;
+      text-align: center;
+      padding: 1rem;
+    }
+
+    /* Hauteur plafonnée pour que eyebrow + H1 + formulaire tiennent
+       au-dessus de la ligne de flottaison sur mobile (trafic à 90 %).
+       Sur la vraie photo, ajouter object-fit: cover. */
+    .hero .photo-placeholder,
+    .hero picture img {
+      aspect-ratio: 16 / 9;
+      margin-top: 2.5rem;
+      max-height: 22svh;
+      object-fit: cover;
+    }
+
+    /* ═══════════ STATS ═══════════ */
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px;
+      background: var(--line);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      overflow: hidden;
+      margin-top: 2rem;
+    }
+    .stat {
+      background: var(--bg-raised);
+      padding: 1.25rem 0.75rem;
+      text-align: center;
+    }
+    .stat .num {
+      font-family: var(--font-display);
+      font-size: clamp(1.6rem, 6vw, 2.2rem);
+      color: var(--accent);
+      line-height: 1.1;
+      font-variant-numeric: tabular-nums;
+    }
+    .stat .label {
+      font-size: 0.75rem;
+      color: var(--ink-dim);
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      margin-top: 0.4rem;
+    }
+
+    /* ═══════════ LISTES (problème + programme) ═══════════ */
+    .pain-list { list-style: none; margin-top: 0.5rem; }
+    .pain-list li {
+      padding: 1.1rem 0;
+      border-bottom: 1px solid var(--line);
+      font-size: 1.05rem;
+    }
+    .pain-list li:first-child { border-top: 1px solid var(--line); }
+
+    .transition-line {
+      margin-top: 1.5rem;
+      font-size: 1.05rem;
+      color: var(--ink-dim);
+    }
+    .transition-line strong { color: var(--accent); font-weight: 600; }
+
+    .program-list { list-style: none; }
+    .program-list li {
+      display: flex;
+      gap: 1rem;
+      padding: 1.1rem 0;
+      border-bottom: 1px solid var(--line);
+      align-items: baseline;
+    }
+    .program-list li:first-child { border-top: 1px solid var(--line); }
+    .program-list .track-num {
+      font-family: var(--font-display);
+      color: var(--accent);
+      font-size: 1.1rem;
+      min-width: 2ch;
+      font-variant-numeric: tabular-nums;
+    }
+    .program-list strong { font-weight: 600; }
+    .program-list .detail {
+      display: block;
+      color: var(--ink-dim);
+      font-size: 0.92rem;
+      margin-top: 0.15rem;
+    }
+
+    .based-on {
+      margin-top: 1.5rem;
+      font-size: 0.95rem;
+      color: var(--ink-dim);
+    }
+
+    /* ═══════════ CTA SECONDAIRE ═══════════ */
+    .cta-secondary {
+      background: var(--bg-raised);
+      border-block: 1px solid var(--line);
+    }
+    .cta-secondary .bonus {
+      color: var(--ink-dim);
+      margin-bottom: 1.75rem;
+      max-width: 44ch;
+    }
+    .cta-secondary .bonus strong { color: var(--ink); font-weight: 600; }
+
+    /* ═══════════ FAQ ═══════════ */
+    .faq-item { border-bottom: 1px solid var(--line); }
+    .faq-item:first-of-type { border-top: 1px solid var(--line); }
+
+    .faq-question {
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1rem;
+      padding: 1.1rem 0;
+      background: none;
+      border: none;
+      color: var(--ink);
+      font: inherit;
+      font-size: 1.05rem;
+      font-weight: 600;
+      text-align: left;
+      cursor: pointer;
+    }
+    .faq-question .chevron {
+      color: var(--accent);
+      font-family: var(--font-display);
+      font-size: 1.2rem;
+      transition: transform 0.2s ease;
+      flex-shrink: 0;
+    }
+    .faq-question[aria-expanded="true"] .chevron { transform: rotate(45deg); }
+
+    .faq-answer {
+      display: none;
+      padding-bottom: 1.25rem;
+      color: var(--ink-dim);
+    }
+    .faq-answer.open { display: block; }
+
+    /* ═══════════ FOOTER ═══════════ */
+    footer {
+      border-top: 1px solid var(--line);
+      padding-block: 2.5rem;
+      font-size: 0.85rem;
+      color: var(--ink-dim);
+    }
+    footer .links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+      margin-bottom: 1rem;
+    }
+    footer a { color: var(--ink-dim); }
+    footer a:hover { color: var(--accent); }
+
+    /* ═══════════ ANIMATIONS (fade-in au scroll) ═══════════ */
+    .reveal {
+      opacity: 0;
+      transform: translateY(16px);
+      transition: opacity 0.55s ease, transform 0.55s ease;
+    }
+    .reveal.in {
+      opacity: 1;
+      transform: none;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after {
+        animation: none !important;
+        transition: none !important;
+      }
+      .reveal { opacity: 1; transform: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ═══════════ 01. HERO ═══════════ -->
+  <section class="hero">
+    <div class="container">
+      <p class="eyebrow">Formation — ouverture [MOIS/ANNÉE]</p>
+      <h1>Vis de l'événementiel.<br><span class="accent">À ton compte.</span></h1>
+      <p class="sub">La méthode de <strong>[PRÉNOM]</strong>, DJ qui a transformé ses soirées en bar en business : <strong>[X] événements par an</strong>, <strong>[Y] DJs</strong> qu'il fait travailler, <strong>[Z] sources de revenus</strong>.</p>
+
+      <form class="signup-form" novalidate>
+        <div class="form-row">
+          <label for="email-hero" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0);">Ton adresse email</label>
+          <input type="email" id="email-hero" name="email" placeholder="ton@email.com" autocomplete="email" required>
+          <button type="submit">Rejoindre la liste d'attente</button>
+        </div>
+        <p class="form-error" role="alert"></p>
+        <p class="reassure">Gratuit. Les inscrits auront le tarif de lancement.</p>
+      </form>
+      <div class="form-success" role="status"></div>
+
+      <!-- PHOTO: [PRÉNOM] aux platines en soirée — remplacer le bloc ci-dessous par :
+      <picture>
+        <source srcset="hero.webp" type="image/webp">
+        <img src="hero.jpg" alt="[PRÉNOM] aux platines pendant une soirée" width="1280" height="720">
+      </picture>
+      (pas de loading="lazy" sur le hero : image visible au chargement) -->
+      <div class="photo-placeholder" role="img" aria-label="Photo à venir : [PRÉNOM] aux platines en soirée">
+        PHOTO — [PRÉNOM] aux platines en soirée
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════ 02. PREUVE / QUI EST [PRÉNOM] ═══════════ -->
+  <section class="reveal">
+    <div class="container">
+      <p class="timecode">01&nbsp;—&nbsp;00:00</p>
+      <h2>Pas un vendeur de formation. Un mec de terrain.</h2>
+      <p>[PRÉNOM] est DJ professionnel à Toulouse [DEPUIS X ANNÉES]. Il mixe dans des bars chaque semaine, anime des soirées privées, et sous-traite des dates à d'autres DJs quand son planning déborde.</p>
+      <p style="margin-top:0.75rem;">Il a diversifié : photobooths en location, photographie culinaire pour les restaurants, prestations événementielles. Plusieurs sources de revenus, un seul métier : l'événementiel.</p>
+      <p class="dim" style="margin-top:0.75rem;">Tout ce qu'il enseigne, il le fait encore aujourd'hui. Chiffres à l'appui.</p>
+
+      <!-- PHOTO: portrait de [PRÉNOM] en situation (cabine, installation photobooth…) — remplacer par :
+      <picture>
+        <source srcset="portrait.webp" type="image/webp">
+        <img src="portrait.jpg" alt="[PRÉNOM] en prestation événementielle" loading="lazy" width="800" height="600">
+      </picture> -->
+      <div class="photo-placeholder" style="margin-top:2rem;" role="img" aria-label="Photo à venir : [PRÉNOM] en prestation">
+        PHOTO — [PRÉNOM] en prestation (cabine, photobooth…)
+      </div>
+
+      <div class="stats">
+        <div class="stat">
+          <div class="num">[X]</div>
+          <div class="label">événements / an</div>
+        </div>
+        <div class="stat">
+          <div class="num">[Y]</div>
+          <div class="label">DJs dans son réseau</div>
+        </div>
+        <div class="stat">
+          <div class="num">[Z]</div>
+          <div class="label">activités complémentaires</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════ 03. LE PROBLÈME ═══════════ -->
+  <section class="reveal">
+    <div class="container">
+      <p class="timecode">02&nbsp;—&nbsp;03:24</p>
+      <h2>Tu te reconnais&nbsp;?</h2>
+      <ul class="pain-list">
+        <li>Tu mixes le week-end, mais ça reste de l'argent de poche.</li>
+        <li>Tu ne sais pas quoi facturer, alors tu prends ce qu'on te donne.</li>
+        <li>Tu dépends d'un seul bar, d'un seul contact, d'une seule source.</li>
+      </ul>
+      <p class="transition-line">C'est exactement là où <strong>[PRÉNOM]</strong> était il y a [N] ans.</p>
+    </div>
+  </section>
+
+  <!-- ═══════════ 04. AU PROGRAMME ═══════════ -->
+  <section class="reveal">
+    <div class="container">
+      <p class="timecode">03&nbsp;—&nbsp;07:12</p>
+      <h2>Au programme</h2>
+      <ul class="program-list">
+        <li>
+          <span class="track-num" aria-hidden="true">A1</span>
+          <span><strong>Décrocher tes premiers contrats en bar</strong><span class="detail">— et les garder.</span></span>
+        </li>
+        <li>
+          <span class="track-num" aria-hidden="true">A2</span>
+          <span><strong>Fixer tes prix sans te brader</strong><span class="detail">Sa grille tarifaire réelle, poste par poste.</span></span>
+        </li>
+        <li>
+          <span class="track-num" aria-hidden="true">B1</span>
+          <span><strong>Passer de prestataire à patron</strong><span class="detail">Sous-traiter des dates à d'autres DJs.</span></span>
+        </li>
+        <li>
+          <span class="track-num" aria-hidden="true">B2</span>
+          <span><strong>Multiplier tes revenus</strong><span class="detail">Photobooth, photo, prestations annexes.</span></span>
+        </li>
+        <li>
+          <span class="track-num" aria-hidden="true">B3</span>
+          <span><strong>Gérer le côté business</strong><span class="detail">Statut, devis, relances, trésorerie.</span></span>
+        </li>
+      </ul>
+      <p class="based-on">Basé à 100&nbsp;% sur ce que [PRÉNOM] fait réellement, chiffres à l'appui.</p>
+    </div>
+  </section>
+
+  <!-- ═══════════ 05. CTA SECONDAIRE ═══════════ -->
+  <section class="cta-secondary reveal">
+    <div class="container">
+      <p class="timecode">04&nbsp;—&nbsp;11:48</p>
+      <h2>Sois prévenu en premier</h2>
+      <p class="bonus">Le <strong>tarif de lancement</strong> sera réservé à la liste d'attente. [BONUS ÉVENTUEL : en t'inscrivant, tu reçois le PDF <strong>« la grille tarifaire de [PRÉNOM] »</strong>.]</p>
+
+      <form class="signup-form" novalidate>
+        <div class="form-row">
+          <label for="email-bottom" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0);">Ton adresse email</label>
+          <input type="email" id="email-bottom" name="email" placeholder="ton@email.com" autocomplete="email" required>
+          <button type="submit">Rejoindre la liste d'attente</button>
+        </div>
+        <p class="form-error" role="alert"></p>
+        <p class="reassure">Gratuit. Zéro spam, juste l'ouverture.</p>
+      </form>
+      <div class="form-success" role="status"></div>
+    </div>
+  </section>
+
+  <!-- ═══════════ 06. FAQ ═══════════ -->
+  <section class="reveal">
+    <div class="container">
+      <p class="timecode">05&nbsp;—&nbsp;15:30</p>
+      <h2>Questions fréquentes</h2>
+
+      <div class="faq-item">
+        <button class="faq-question" aria-expanded="false" aria-controls="faq-1">
+          C'est pour qui&nbsp;?
+          <span class="chevron" aria-hidden="true">+</span>
+        </button>
+        <div class="faq-answer" id="faq-1">
+          DJs débutants ou semi-pros, et plus largement tous les profils qui veulent se lancer dans l'événementiel à leur compte. Pas besoin d'être déjà pro.
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" aria-expanded="false" aria-controls="faq-2">
+          Ça sort quand&nbsp;?
+          <span class="chevron" aria-hidden="true">+</span>
+        </button>
+        <div class="faq-answer" id="faq-2">
+          [MOIS/ANNÉE]. Les inscrits à la liste d'attente seront prévenus en premier.
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" aria-expanded="false" aria-controls="faq-3">
+          Combien ça coûtera&nbsp;?
+          <span class="chevron" aria-hidden="true">+</span>
+        </button>
+        <div class="faq-answer" id="faq-3">
+          Le prix public n'est pas encore fixé. Le tarif de lancement sera réservé à la liste d'attente.
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" aria-expanded="false" aria-controls="faq-4">
+          Je dois déjà avoir du matériel&nbsp;?
+          <span class="chevron" aria-hidden="true">+</span>
+        </button>
+        <div class="faq-answer" id="faq-4">
+          Non. La formation couvre aussi comment démarrer léger, sans investir des milliers d'euros.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════ 07. FOOTER ═══════════ -->
+  <footer>
+    <div class="container">
+      <div class="links">
+        <a href="mentions-legales.html">Mentions légales</a>
+        <a href="[LIEN_INSTAGRAM]" rel="noopener" target="_blank">Instagram [@HANDLE_INSTA]</a>
+      </div>
+      <p>© [ANNÉE] [NOM DU PROJET]</p>
+    </div>
+  </footer>
+
+  <script>
+    /* ═══════════════════════════════════════════════════════
+       CONFIG — À REMPLACER AVANT MISE EN LIGNE
+       ═══════════════════════════════════════════════════════ */
+    const WEBHOOK_URL = "https://REMPLACER-PAR-TON-WEBHOOK-N8N.example.com/webhook/liste-attente";
+    const INSTA_HANDLE = "[@HANDLE_INSTA]";
+    const INSTA_URL = "[LIEN_INSTAGRAM]";
+
+    /* ═══════════ Source de trafic (?src=insta|tiktok|story) ═══════════ */
+    const SOURCE = new URLSearchParams(window.location.search).get("src") || "direct";
+
+    /* ═══════════ Formulaires (hero + CTA secondaire) ═══════════ */
+    const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+    document.querySelectorAll(".signup-form").forEach((form) => {
+      const input = form.querySelector('input[type="email"]');
+      const button = form.querySelector('button[type="submit"]');
+      const errorEl = form.querySelector(".form-error");
+      const successEl = form.nextElementSibling;
+
+      form.addEventListener("submit", async (e) => {
+        e.preventDefault();
+        errorEl.textContent = "";
+        errorEl.classList.remove("visible");
+
+        const email = input.value.trim();
+        if (!EMAIL_RE.test(email)) {
+          errorEl.textContent = "Entre une adresse email valide.";
+          errorEl.classList.add("visible");
+          input.focus();
+          return;
+        }
+
+        // État loading
+        const originalLabel = button.textContent;
+        button.disabled = true;
+        button.textContent = "Inscription…";
+
+        try {
+          const res = await fetch(WEBHOOK_URL, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              email: email,
+              source: SOURCE,
+              timestamp: new Date().toISOString(),
+            }),
+          });
+          if (!res.ok) throw new Error("HTTP " + res.status);
+
+          // Succès : remplace le formulaire par le message
+          form.style.display = "none";
+          successEl.innerHTML =
+            'C\'est noté ✅ Tu seras prévenu en premier. Pense à suivre ' +
+            '<a href="' + INSTA_URL + '" rel="noopener" target="_blank">' + INSTA_HANDLE + '</a>' +
+            ' pour les coulisses.';
+          successEl.classList.add("visible");
+
+          // Événement Meta Lead
+          if (typeof fbq === "function") {
+            fbq("track", "Lead");
+          }
+        } catch (err) {
+          // Erreur : message clair, l'email reste dans le champ
+          errorEl.textContent = "Oups, ça n'a pas marché. Réessaie ou écris-nous en DM.";
+          errorEl.classList.add("visible");
+          button.disabled = false;
+          button.textContent = originalLabel;
+        }
+      });
+    });
+
+    /* ═══════════ FAQ accordéon ═══════════ */
+    document.querySelectorAll(".faq-question").forEach((btn) => {
+      btn.addEventListener("click", () => {
+        const answer = document.getElementById(btn.getAttribute("aria-controls"));
+        const isOpen = btn.getAttribute("aria-expanded") === "true";
+        btn.setAttribute("aria-expanded", String(!isOpen));
+        answer.classList.toggle("open", !isOpen);
+      });
+    });
+
+    /* ═══════════ Fade-in au scroll (respecte prefers-reduced-motion) ═══════════ */
+    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (!reduceMotion && "IntersectionObserver" in window) {
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add("in");
+              observer.unobserve(entry.target);
+            }
+          });
+        },
+        { threshold: 0.1 }
+      );
+      document.querySelectorAll(".reveal").forEach((el) => observer.observe(el));
+    } else {
+      document.querySelectorAll(".reveal").forEach((el) => el.classList.add("in"));
+    }
+  </script>
+</body>
+</html>
