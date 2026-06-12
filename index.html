@@ -1,54 +1,24 @@
 <!DOCTYPE html>
-<!--
-═══════════════════════════════════════════════════════════════════════════
-  LANDING PAGE — Formation "Vivre de l'événementiel"
-  Page de validation / liste d'attente — fichier unique, prêt pour FTP.
-
-  ✅ À REMPLACER AVANT MISE EN LIGNE (cherche les [CROCHETS] et placeholders) :
-
-  1. JS (tout en bas de ce fichier) :
-     - WEBHOOK_URL        → l'URL du webhook N8N qui reçoit les emails
-  2. Pixel Meta (dans le <head>) :
-     - PIXEL_ID_HERE      → l'ID du pixel Facebook (2 occurrences)
-  3. Textes / chiffres (cherche "[" dans le fichier) :
-     - [PRÉNOM]           → prénom du DJ
-     - [MOIS/ANNÉE]       → date d'ouverture de la formation (2 occurrences)
-     - [X] / [Y] / [Z]    → événements/an, DJs du réseau, sources de revenus
-     - [N]                → il y a combien d'années il a démarré
-     - [DEPUIS X ANNÉES]  → ancienneté dans la bio
-     - [@HANDLE_INSTA]    → handle Instagram (message de succès + footer)
-     - [LIEN_INSTAGRAM]   → URL du compte Instagram (footer)
-     - [NOM DU PROJET]    → nom du projet dans le copyright
-  4. Images (cherche "PHOTO:" dans le fichier) :
-     - hero.webp / hero.jpg       → [PRÉNOM] aux platines (FOND du hero,
-                                     image sombre/contrastée recommandée)
-     - portrait.webp / portrait.jpg → portrait de [PRÉNOM] en situation
-     - og-image.jpg               → image de partage 1200×630 (Open Graph)
-     - favicon.ico                → favicon
-  5. Footer :
-     - mentions-legales.html      → page mentions légales (lien placeholder)
-═══════════════════════════════════════════════════════════════════════════
--->
 <html lang="fr">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 
   <!-- SEO -->
-  <title>Vis de l'événementiel. À ton compte. — La formation de [PRÉNOM]</title>
-  <meta name="description" content="DJ le week-end mais tu n'en vis pas ? [PRÉNOM], DJ pro à Toulouse, ouvre une formation pour vivre de l'événementiel en indépendant. Rejoins la liste d'attente.">
+  <title>Vis de l'événementiel. À ton compte. — La formation de Guillaume</title>
+  <meta name="description" content="DJ le week-end mais tu n'en vis pas ? Guillaume, DJ pro à Toulouse, ouvre une formation pour vivre de l'événementiel en indépendant. Rejoins la liste d'attente.">
 
   <!-- Open Graph -->
   <meta property="og:type" content="website">
   <meta property="og:title" content="Vis de l'événementiel. À ton compte.">
-  <meta property="og:description" content="La méthode terrain de [PRÉNOM], DJ pro à Toulouse, pour vivre de l'événementiel en indépendant. Liste d'attente ouverte.">
+  <meta property="og:description" content="La méthode terrain de Guillaume, DJ pro à Toulouse, pour vivre de l'événementiel en indépendant. Liste d'attente ouverte.">
   <meta property="og:image" content="og-image.jpg">
   <meta property="og:locale" content="fr_FR">
 
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Vis de l'événementiel. À ton compte.">
-  <meta name="twitter:description" content="La méthode terrain de [PRÉNOM], DJ pro à Toulouse, pour vivre de l'événementiel en indépendant.">
+  <meta name="twitter:description" content="La méthode terrain de Guillaume, DJ pro à Toulouse, pour vivre de l'événementiel en indépendant.">
   <meta name="twitter:image" content="og-image.jpg">
 
   <!-- FAVICON: placeholder -->
@@ -58,23 +28,6 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-
-  <!-- Pixel Meta (Facebook) — remplacer PIXEL_ID_HERE -->
-  <script>
-    !function(f,b,e,v,n,t,s)
-    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-    n.queue=[];t=b.createElement(e);t.async=!0;
-    t.src=v;s=b.getElementsByTagName(e)[0];
-    s.parentNode.insertBefore(t,s)}(window,document,'script',
-    'https://connect.facebook.net/en_US/fbevents.js');
-    fbq('init', 'PIXEL_ID_HERE');
-    fbq('track', 'PageView');
-  </script>
-  <noscript><img height="1" width="1" style="display:none"
-    src="https://www.facebook.com/tr?id=PIXEL_ID_HERE&ev=PageView&noscript=1"
-  /></noscript>
 
   <style>
     /* ═══════════ RESET & TOKENS ═══════════ */
@@ -178,7 +131,7 @@
       overflow: hidden;
     }
 
-    /* PHOTO: [PRÉNOM] aux platines en soirée — FOND DU HERO.
+    /* PHOTO: Guillaume aux platines en soirée — FOND DU HERO.
        Remplacer le dégradé ci-dessous par la vraie image :
        .hero-bg { background-image: image-set(url("hero.webp") type("image/webp"), url("hero.jpg") type("image/jpeg")); }
        L'image n'est PAS en lazy : elle est visible au chargement. */
@@ -377,17 +330,18 @@
       padding: 1rem;
       margin-top: 0.25rem;
     }
-    /* PHOTO: portrait de [PRÉNOM] en situation — remplacer par :
+    /* PHOTO: portrait de Guillaume en situation — remplacer par :
        <picture>
          <source srcset="portrait.webp" type="image/webp">
-         <img src="portrait.jpg" alt="[PRÉNOM] en prestation" loading="lazy" width="176" height="176">
+         <img src="portrait.jpg" alt="Guillaume en prestation" loading="lazy" width="176" height="176">
        </picture> */
     .proof-photo {
       width: 88px;
       height: 88px;
       border-radius: calc(var(--radius) - 6px);
-      background: linear-gradient(145deg, #1B2030, #11141D);
-      border: 1px dashed var(--line);
+      background: url("portrait.jpg") center / cover no-repeat,
+                  linear-gradient(145deg, #1B2030, #11141D);
+      border: 1px solid var(--line);
       display: flex;
       align-items: center;
       justify-content: center;
@@ -615,11 +569,11 @@
 
   <!-- ═══════════ 01. HERO — tient dans 1 écran mobile ═══════════ -->
   <section class="hero">
-    <div class="hero-bg" role="img" aria-label="Photo à venir : [PRÉNOM] aux platines en soirée"></div>
+    <div class="hero-bg" role="img" aria-label="Photo à venir : Guillaume aux platines en soirée"></div>
     <div class="container">
-      <p class="eyebrow">Formation — ouverture [MOIS/ANNÉE]</p>
+      <p class="eyebrow">Formation — ouverture décembre 2026</p>
       <h1>Vis de l'événementiel. <span class="accent">À&nbsp;ton compte.</span></h1>
-      <p class="sub">La méthode de <strong>[PRÉNOM]</strong>, DJ qui a transformé ses soirées en bar en business : <strong>[X]&nbsp;événements/an</strong>, <strong>[Y]&nbsp;DJs</strong> qu'il fait travailler, <strong>[Z]&nbsp;sources de revenus</strong>.</p>
+      <p class="sub">La méthode de <strong>Guillaume</strong>, DJ qui a transformé ses soirées en bar en business : <strong>5&nbsp;DJs</strong> qu'il fait travailler, <strong>5&nbsp;sources de revenus</strong>, <strong>3&nbsp;ans</strong> de terrain.</p>
 
       <form class="signup-form" novalidate>
         <div class="form-row">
@@ -641,21 +595,21 @@
       <h2>Pas un vendeur de formation. Un mec de terrain.</h2>
 
       <div class="proof-card">
-        <div class="proof-photo">PHOTO<br>[PRÉNOM]</div>
-        <p>DJ pro à Toulouse [DEPUIS X ANNÉES] : bars chaque semaine, soirées privées, photobooths, photo culinaire. Quand son planning déborde, il sous-traite à d'autres DJs. <span class="dim">Tout ce qu'il enseigne, il le fait encore aujourd'hui.</span></p>
+        <div class="proof-photo" role="img" aria-label="Guillaume, DJ à Toulouse"></div>
+        <p>DJ pro à Toulouse depuis 3 ans : bars chaque semaine, soirées privées, photobooths, photo culinaire. Quand son planning déborde, il sous-traite à d'autres DJs. <span class="dim">Tout ce qu'il enseigne, il le fait encore aujourd'hui.</span></p>
       </div>
 
       <div class="stats">
         <div class="stat">
-          <div class="num">[X]</div>
-          <div class="label">événements / an</div>
+          <div class="num">3</div>
+          <div class="label">ans de terrain</div>
         </div>
         <div class="stat">
-          <div class="num">[Y]</div>
+          <div class="num">5</div>
           <div class="label">DJs dans son réseau</div>
         </div>
         <div class="stat">
-          <div class="num">[Z]</div>
+          <div class="num">5</div>
           <div class="label">activités en parallèle</div>
         </div>
       </div>
@@ -672,7 +626,7 @@
         <li><span class="x" aria-hidden="true">✕</span>Tu ne sais pas quoi facturer, alors tu prends ce qu'on te donne.</li>
         <li><span class="x" aria-hidden="true">✕</span>Tu dépends d'un seul bar, d'un seul contact, d'une seule source.</li>
       </ul>
-      <p class="transition-line">C'est exactement là où <strong>[PRÉNOM]</strong> était il y a [N] ans.</p>
+      <p class="transition-line">C'est exactement là où <strong>Guillaume</strong> était il y a 3 ans.</p>
     </div>
   </section>
 
@@ -711,7 +665,7 @@
           <span class="detail">Statut, devis, relances, trésorerie.</span>
         </li>
       </ul>
-      <p class="based-on">Basé à 100&nbsp;% sur ce que [PRÉNOM] fait réellement, chiffres à l'appui.</p>
+      <p class="based-on">Basé à 100&nbsp;% sur ce que Guillaume fait réellement, chiffres à l'appui.</p>
     </div>
   </section>
 
@@ -720,7 +674,7 @@
     <div class="container">
       <p class="timecode">04&nbsp;—&nbsp;11:48</p>
       <h2>Sois prévenu en premier</h2>
-      <p class="bonus">Le <strong>tarif de lancement</strong> sera réservé à la liste d'attente. [BONUS ÉVENTUEL : en t'inscrivant, tu reçois le PDF <strong>« la grille tarifaire de [PRÉNOM] »</strong>.]</p>
+      <p class="bonus">Le <strong>tarif de lancement</strong> sera réservé à la liste d'attente. En t'inscrivant, tu reçois le PDF <strong>« la grille tarifaire de Guillaume »</strong>.</p>
 
       <form class="signup-form" novalidate>
         <div class="form-row">
@@ -757,7 +711,7 @@
           <span class="chevron" aria-hidden="true">+</span>
         </button>
         <div class="faq-answer" id="faq-2">
-          [MOIS/ANNÉE]. Les inscrits à la liste d'attente seront prévenus en premier.
+          décembre 2026. Les inscrits à la liste d'attente seront prévenus en premier.
         </div>
       </div>
 
@@ -787,8 +741,8 @@
   <footer>
     <div class="container">
       <a href="mentions-legales.html">Mentions légales</a>
-      <a href="[LIEN_INSTAGRAM]" rel="noopener" target="_blank">Instagram [@HANDLE_INSTA]</a>
-      <span>© [ANNÉE] [NOM DU PROJET]</span>
+      <a href="https://www.instagram.com/dj.guillaume.b" rel="noopener" target="_blank">Instagram @dj.guillaume.b</a>
+      <span>© 2026 Guillaume B.</span>
     </div>
   </footer>
 
@@ -802,9 +756,12 @@
     /* ═══════════════════════════════════════════════════════
        CONFIG — À REMPLACER AVANT MISE EN LIGNE
        ═══════════════════════════════════════════════════════ */
-    const WEBHOOK_URL = "https://REMPLACER-PAR-TON-WEBHOOK-N8N.example.com/webhook/liste-attente";
-    const INSTA_HANDLE = "[@HANDLE_INSTA]";
-    const INSTA_URL = "[LIEN_INSTAGRAM]";
+    // ⚠️ BACKEND NON CONFIGURÉ : tant que cette URL est vide, le formulaire
+    // affiche le message de succès mais N'ENREGISTRE PAS les emails.
+    // Brancher N8N / Formspree / Google Apps Script ici pour capturer les inscrits.
+    const WEBHOOK_URL = "";
+    const INSTA_HANDLE = "@dj.guillaume.b";
+    const INSTA_URL = "https://www.instagram.com/dj.guillaume.b";
 
     /* ═══════════ Source de trafic (?src=insta|tiktok|story) ═══════════ */
     const SOURCE = new URLSearchParams(window.location.search).get("src") || "direct";
@@ -838,16 +795,21 @@
         button.textContent = "Inscription…";
 
         try {
-          const res = await fetch(WEBHOOK_URL, {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({
-              email: email,
-              source: SOURCE,
-              timestamp: new Date().toISOString(),
-            }),
-          });
-          if (!res.ok) throw new Error("HTTP " + res.status);
+          if (WEBHOOK_URL) {
+            const res = await fetch(WEBHOOK_URL, {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({
+                email: email,
+                source: SOURCE,
+                timestamp: new Date().toISOString(),
+              }),
+            });
+            if (!res.ok) throw new Error("HTTP " + res.status);
+          } else {
+            // Backend non configuré : on n'enregistre rien, mais on ne bloque pas le visiteur.
+            console.warn("[liste-attente] WEBHOOK_URL vide — email non enregistré :", email);
+          }
 
           // Succès : remplace le formulaire par le message, masque la barre sticky
           form.style.display = "none";
